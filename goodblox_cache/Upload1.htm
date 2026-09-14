@@ -1,0 +1,156 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
+<HTML>
+	<HEAD><title>
+	Upload
+</title>
+<style>
+	*
+{
+	font-size: 12px;
+	font-family: 'Comic Sans MS', Verdana, Arial, Helvetica, sans-serif;
+}
+H1
+{
+	font-weight: bold;
+	font-size: larger;
+}
+
+</style>
+
+<meta content="Microsoft Visual Studio .NET 7.1" name="GENERATOR" /><meta content="C#" name="CODE_LANGUAGE" />
+<meta content="JavaScript" name="vs_defaultClientScript" />
+<meta content="http://schemas.microsoft.com/intellisense/ie5" name="vs_targetSchema" />
+</HEAD>
+	<body bgColor="buttonface" scroll="no" style="background-color: white;">
+		<form name="Form1" method="post" action="Upload.aspx" onsubmit="javascript:return WebForm_OnSubmit();" id="Form1">
+<div>
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUJMjcyNDIxMDA1ZGTvke74cS+qm4nFchNyWTBREhwBzA==" />
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['Form1'];
+if (!theForm) {
+    theForm = document.Form1;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="/WebResource.axd?d=uMoX-V4qx8lxPrVuMdcWbw2&amp;t=633374465161562500" type="text/javascript"></script>
+
+
+<script src="/WebResource.axd?d=93G6GjayS1zg7-NyY2k_bydKjiMxomFSkdkPo_ltn2Q1&amp;t=633374465161562500" type="text/javascript"></script>
+<script type="text/javascript">
+//<![CDATA[
+function WebForm_OnSubmit() {
+if (typeof(ValidatorOnSubmit) == "function" && ValidatorOnSubmit() == false) return false;
+return true;
+}
+//]]>
+</script>
+
+			<script>
+		function publish(oSrc, args)  {
+			document.getElementById("Uploading").style.display='block';
+			try
+			{
+				window.external.ExecScript('visit=game:GetService("Visit") game:Save(visit:GetUploadUrl())');
+				args.IsValid = true;
+				document.getElementById("DialogResult").value='1';
+				window.close();
+			}
+			catch (ex)
+			{
+			    try
+			    {
+				    window.external.ExecScript('visit=game:GetService("Visit") game:Save(visit:GetUploadUrl())');
+				    args.IsValid = true;
+				    document.getElementById("DialogResult").value='1';
+				    window.close();
+			    }
+			    catch (ex2)
+			    {
+				    args.IsValid = false;
+			    }
+			}
+			document.getElementById("Uploading").style.display='none';
+		}
+			</script>
+			<TABLE height="100%" cellPadding="12" width="100%">
+				<TR vAlign="top">
+					<TD colSpan="2">
+						<P>You are about to leave your Place. Do you wish to save changes made to your 
+							Place before exiting?</P>
+						<DIV id="Uploading" style="DISPLAY: none; FONT-WEIGHT: bold; COLOR: royalblue">Uploading. 
+							Please wait...</DIV>
+						<span id="CustomValidator2" style="color:Red;visibility:hidden;">Upload Failed!</span><INPUT id="DialogResult" type="hidden"></TD>
+				</TR>
+				<TR>
+					<td width="120"><input type="submit" name="Button1" value="Save" onclick="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions('Button1', '', true, '', '', false, false))" id="Button1" class="OKCancelButton" style="width:100%;" /></td>
+					<td>Save changes to my Place to ROBLOX. You will leave your place after the save 
+						has completed.</td>
+				</TR>
+				<tr>
+					<td width="120"><INPUT class="OKCancelButton" style="WIDTH: 100%" onclick="DialogResult.value='1'; window.close(); return false"
+							type="button" value="Don't Save"></td>
+					<td>Leave my Place on ROBLOX unchanged. You will lose any changes you made during 
+						your visit.</td>
+				</tr>
+				<tr>
+					<td width="120"><INPUT class="OKCancelButton" style="WIDTH: 100%" onclick="DialogResult.value='2'; window.close(); return false"
+							type="button" value="Cancel"></td>
+					<td>Keep playing and exit later</td>
+				</tr>
+			</TABLE>
+		
+<script type="text/javascript">
+//<![CDATA[
+var Page_Validators =  new Array(document.getElementById("CustomValidator2"));
+//]]>
+</script>
+
+<script type="text/javascript">
+//<![CDATA[
+var CustomValidator2 = document.all ? document.all["CustomValidator2"] : document.getElementById("CustomValidator2");
+CustomValidator2.errormessage = "Upload Failed!";
+CustomValidator2.evaluationfunction = "CustomValidatorEvaluateIsValid";
+CustomValidator2.clientvalidationfunction = "publish";
+//]]>
+</script>
+
+<div>
+
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEWAgKgiNXFBQKM54rGBv5EhEt8Guz0ltRCOqU+2KOVocOB" />
+</div>
+
+<script type="text/javascript">
+<!--
+var Page_ValidationActive = false;
+if (typeof(ValidatorOnLoad) == "function") {
+    ValidatorOnLoad();
+}
+
+function ValidatorOnSubmit() {
+    if (Page_ValidationActive) {
+        return ValidatorCommonOnSubmit();
+    }
+    else {
+        return true;
+    }
+}
+// -->
+</script>
+        </form>
+	</body>
+</HTML>

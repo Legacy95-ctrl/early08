@@ -1,0 +1,119 @@
+﻿
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head><title>
+	ROBLOX: A FREE Virtual World-Building Game with Avatar Chat, 3D Environments, and Physics
+</title><link rel="stylesheet" type="text/css" href="../CSS/AllCSS.ashx" /><link rel="Shortcut Icon" type="image/ico" href="../roblox.ico" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta name="author" content="ROBLOX Corporation" /><meta name="description" content="ROBLOX is SAFE for kids! ROBLOX is a FREE casual virtual world with fully constructible/desctructible environments and immersive physics. Build, battle, chat, or just hang out." /><meta name="keywords" content="game, video game, building game, contstruction game, online game, LEGO game, LEGO, MMO, MMORPG, virtual world, avatar chat" /><meta name="robots" content="all" /></head>
+	<body>
+		<form name="aspnetForm" method="post" action="ResetPasswordRequest.aspx" id="aspnetForm">
+<div>
+<input type="hidden" name="ctl00_ScriptManager1_HiddenField" id="ctl00_ScriptManager1_HiddenField" value="" />
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwULLTE0NzQ4NjQ4NjYPZBYCZg9kFgICAw9kFgQCAw8PFgYeCEltYWdlVXJsBRh+L2ltYWdlcy9Mb2dvXzI2N183MC5wbmceC0NvbW1hbmROYW1lZR4PQ29tbWFuZEFyZ3VtZW50ZGRkAgUPZBYCAgUPDxYEHgRUZXh0BTBBbiBlbWFpbCB3aXRoIGluc3RydWN0aW9ucyBoYXMgYmVlbiBzZW50IHRvIHlvdS4eB1Zpc2libGVnZGQYAQUjY3RsMDAkcmJ4R29vZ2xlQW5hbHl0aWNzJE11bHRpVmlldzEPD2QCAWRKi1qTpB79E+0MMiFnA73sHIsq3g==" />
+</div>
+
+<script type="text/javascript">
+<!--
+var theForm = document.forms['aspnetForm'];
+if (!theForm) {
+    theForm = document.aspnetForm;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+// -->
+</script>
+
+
+<script src="/WebResource.axd?d=B7M39kU2ybmeUhKCRpRnNg2&amp;t=633312475778593750" type="text/javascript"></script>
+
+
+<script src="/ScriptResource.axd?d=bY7V5sH7RTK2l-IimIwkc2AXSF6_aVGSqLu6v9fAJq1xzmvmgw2mpTYvgwXaJbEi1RJBKhKbHQQdHcCqa3V5aIIm250_pvJyaPE_T7e4b7o1&amp;t=633312022171805044" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=bY7V5sH7RTK2l-IimIwkc2AXSF6_aVGSqLu6v9fAJq1xzmvmgw2mpTYvgwXaJbEi1RJBKhKbHQQdHcCqa3V5aMgv_qbk_RmCgKVSa7gSZQzkNeCUxaDSL-IWqV74rGoW0&amp;t=633312022171805044" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=cLY2S13szZTaD7C3g08fF6kuQWBxj7XV0VtehSULrDgHRE5-nVNcOyZi-3gbWe4D0&amp;t=633324508785937500" type="text/javascript"></script>
+            <script type="text/javascript">
+//<![CDATA[
+Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', document.getElementById('aspnetForm'));
+Sys.WebForms.PageRequestManager.getInstance()._updateControls([], [], [], 90);
+//]]>
+</script>
+
+			<div id="Container">
+				<div id="Header">
+					<div id="Banner">
+						<div id="Options">
+							<div id="Settings"></div>
+						</div>
+						<div id="Logo"><a id="ctl00_Image1" title="ROBLOX" href="/Default.aspx" style="display:inline-block;height:70px;width:267px;cursor:pointer;"><img src="/images/Logo_267_70.png" border="0" id="img" alt="ROBLOX" /></a></div>
+					</div>
+				</div>
+				<div id="Body">
+					
+    <h3>
+        Forgot your password?</h3>
+    <p>
+        We can send you an email to reset it. If you can't remember your username then
+        just enter your email address.<br />
+    </p>
+    <p>
+        Username or email:
+        <input name="ctl00$cphRoblox$UserName" type="text" value="RSBCUser" id="ctl00_cphRoblox_UserName" /></p>
+    <p>
+        <table id="Table1">
+            <tr>
+                <td>
+                </td>
+                <td width="140">
+                    <a id="ctl00_cphRoblox_LinkButtonResetPassword" href="javascript:__doPostBack('ctl00$cphRoblox$LinkButtonResetPassword','')">Reset password</a></td>
+                <td>
+                    <span id="ctl00_cphRoblox_LabelEmailSent">An email with instructions has been sent to you.</span>
+                    <input name="ctl00$cphRoblox$hiddenEmail" type="hidden" id="ctl00_cphRoblox_hiddenEmail" value="An email with instructions has been sent to you." /></td>
+            </tr>
+        </table>
+    </p>
+
+				</div>
+				<div id="Footer">
+					
+<hr />
+<p class="Legalese">
+    ROBLOX, "Online Building Toy", characters, logos, names, and all related indicia
+    are trademarks of
+    <a id="ctl00_rbxFooter_hlRobloxCorporation" href="../info/About.aspx">ROBLOX Corporation</a>,
+    ©2007. Patents pending.<br />
+    ROBLOX Corp. is not affliated with Lego, MegaBloks, Bionicle, Pokemon, Nintendo, Lincoln Logs, Yu Gi Oh, K'nex, Tinkertoys, Erector Set, or the Pirates of the Caribbean. ARrrr!<br />
+    Use of this site signifies your acceptance of the
+    <a id="ctl00_rbxFooter_hlTermsOfService" href="../info/TermsOfService.aspx">Terms and Conditions</a>.<br />
+    <a id="ctl00_rbxFooter_hlPrivacyPolicy" href="../info/Privacy.aspx">Privacy Policy</a>
+    &nbsp;|&nbsp; <a href="mailto:info@roblox.com">Contact Us</a> &nbsp;|&nbsp;
+    <a id="ctl00_rbxFooter_hlAboutRoblox" href="../info/About.aspx">About Us</a>
+    &nbsp;|&nbsp;
+    <a id="ctl00_rbxFooter_HyperLink1" href="../info/Jobs.aspx">Jobs</a></p>
+
+				</div>
+			</div>
+			
+        <script src="https://ssl.google-analytics.com/urchin.js" type="text/javascript"></script>
+        <script type="text/javascript">_uacct="UA-486632-1"; _udn="roblox.com"; urchinTracker(); __utmSetVar('Visitor/Anonymous');</script>
+    
+
+		
+<div>
+
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEWBAK+l/34AQKE6ZusCAL9h+/PCAKG57mvAtH8gM6WbLEcwxFKlqJdzsuDsa0N" />
+</div>
+
+<script type="text/javascript">
+<!--
+Sys.Application.initialize();
+// -->
+</script>
+</form>
+	</body>
+</html>
