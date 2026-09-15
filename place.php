@@ -93,10 +93,12 @@ $fc = db()->prepare('SELECT COUNT(*) FROM place_favorites WHERE place_id = ?');
 $fc->execute([$id]);
 $favCount = (int)$fc->fetchColumn();
 $visitCount = (int)$p['visits'];
+$favCountReal = $favCount === 1 ? '1 time' : $favCount . ' times';
+$visitCountReal = $visitCount === 1 ? '1 time' : $visitCount . ' times';
 
 require __DIR__ . '/includes/header.php';
 ?>
-<script>function switchTab(type) { if (type == undefined) { type = "games"; } if (type == "games") { var a = document.getElementById("TabbedInfo_GamesTab"); var b = document.getElementById("TabbedInfo_CommentaryTab"); if (a) a.style.display = ""; if (b) b.style.display = "none"; } else if (type == "commentary") { var a = document.getElementById("TabbedInfo_GamesTab"); var b = document.getElementById("TabbedInfo_CommentaryTab"); if (a) a.style.display = "none"; if (b) b.style.display = ""; } }
+<script>function switchTab(type) { if (type == undefined) { type = "games"; } if (type == "games") { var a = document.getElementById("TabbedInfo_GamesTab"); var b = document.getElementById("ctl00_cphRoblox_TabbedInfo_CommentaryTab"); if (a) a.style.display = ""; if (b) b.style.display = "none"; } else if (type == "commentary") { var a = document.getElementById("TabbedInfo_GamesTab"); var b = document.getElementById("ctl00_cphRoblox_TabbedInfo_CommentaryTab"); if (a) a.style.display = "none"; if (b) b.style.display = ""; } }
 
 function getComments(placeid, page) {
     if (placeid == null) return;
@@ -120,101 +122,125 @@ if (window.location.hash && window.location.hash.indexOf("commentary") != -1) { 
 getComments(<?php echo $id; ?>);
 </script>
 <div id="ItemContainer">
-	<div id="Item">
-		<h2><?php echo e($p['name']); ?></h2>
-		<?php foreach (consume_notices() as $n): ?>
-			<p style="color: <?php echo $n['type'] === 'success' ? '#060' : '#c00'; ?>; font-weight: bold;"><?php echo e($n['message']); ?></p>
-		<?php endforeach; ?>
-		<?php if ($showConfigure): ?>
-			<div id="Configure" style="background:#EEE;border:1px solid #CCC;padding:10px;margin:0 0 12px 0;">
-				<h3 style="margin:0 0 6px 0;">Configure Place</h3>
-				<form method="post" action="place.php?ID=<?php echo $id; ?>">
-					<label for="cfname" style="font-weight:bold;">Place name:</label><br>
-					<input type="text" name="name" id="cfname" maxlength="100" value="<?php echo e($p['name']); ?>" style="width:300px;"><br>
-					<label for="cfdesc" style="font-weight:bold;">Description:</label><br>
-					<textarea name="description" id="cfdesc" rows="4" cols="50"><?php echo e($p['description']); ?></textarea><br>
-					<label><input type="checkbox" name="copylocked" value="1" <?php echo (int)$p['copylocked'] === 1 ? 'checked' : ''; ?>> CopyLocked (players can't download the game)</label><br>
-					<label><input type="checkbox" name="is_joinable" value="1" <?php echo (int)$p['is_joinable'] === 1 ? 'checked' : ''; ?>> Joinable (players can join the game)</label><br>
-					<button type="submit" class="Button" name="configure" value="1">Save</button>
-					<a class="Button" href="place.php?ID=<?php echo $id; ?>">Cancel</a>
-				</form>
-			</div>
-		<?php endif; ?>
-		<div id="Details">
-			<div id="Thumbnail_Place">
-				<a disabled="disabled" title="<?php echo e($p['name']); ?>" onclick="return false" style="display:inline-block;"><img src="Thumbs/Place.php?id=<?php echo $id; ?>&amp;v=<?php echo time(); ?>" width="420" height="230" border="0" alt="<?php echo e($p['name']); ?>"></a>
-			</div>
-			<div id="Summary">
-				<h3>ROBLOX Place</h3>
-				<div id="Creator" class="Creator">
-					<div class="Avatar">
-						<a title="<?php echo e($p['owner_name']); ?>" href="user.php?id=<?php echo (int)$p['owner_id']; ?>" style="display:inline-block;cursor:pointer;"><img src="<?php echo e(avatar_thumb(['id' => (int)$p['owner_id']], 'friends')); ?>" width="100" height="100" border="0" blankurl="http://t6.roblox.com:80/blank-100x100.gif" alt="<?php echo e($p['owner_name']); ?>"></a>
-					</div>
-					<b>Creator:</b> <a href="user.php?id=<?php echo (int)$p['owner_id']; ?>"><?php echo e($p['owner_name']); ?></a>
-				</div>
-				<div style="clear:both;"></div>
-				<div id="LastUpdate"><span class="Label">Updated:</span> <?php echo e(time_ago($p['updated'] ?? $p['created'])); ?></div>
-				<div id="Favorited"><span class="Label">Favorited:</span> <?php echo $favCount === 1 ? '1 time' : $favCount . ' times'; ?></div>
-				<div id="Visited" class="Visited"><span class="Label">Visited:</span> <?php echo $visitCount === 1 ? '1 time' : $visitCount . ' times'; ?></div>
-				<?php if (trim((string)$p['description']) !== ''): ?>
-					<div id="DescriptionLabel"><span class="Label">Description:</span></div>
-					<div id="Description"><?php echo nl2br(e($p['description'])); ?></div>
-				<?php endif; ?>
-				<div id="ReportAbuse">
-					<span class="AbuseIcon"><a href="report.php?target=place&amp;id=<?php echo $id; ?>"><img src="resources/abuse.png" alt="Report Abuse" border="0"></a></span>
-					<span class="AbuseButton"><a href="report.php?target=place&amp;id=<?php echo $id; ?>">Report Abuse</a></span>
-				</div>
-			</div>
-			<div style="clear:both;"></div>
-
-			<div id="Actions_Place">
-				<?php if ($me): ?>
-					<a id="FavoriteThisPlaceButton" href="place.php?ID=<?php echo $id; ?>&amp;favorite=<?php echo $isFav ? '0' : '1'; ?>"><?php echo $isFav ? 'Unfavorite' : 'Favorite'; ?></a>
-				<?php else: ?>
-					<a href="login.php">Login to favorite</a>
-				<?php endif; ?>
-				<?php if (is_admin()): ?>
-					&nbsp;|&nbsp;
-					<a href="api/renderplace.php?id=<?php echo $id; ?>" style="color:red;">Render Place</a>
-				<?php endif; ?>
-				<?php if ($isOwner || is_admin()): ?>
-					&nbsp;|&nbsp;
-					<a href="place.php?ID=<?php echo $id; ?>&amp;configure=1">Configure</a>
-					&nbsp;|&nbsp;
-					<a href="place.php?ID=<?php echo $id; ?>&amp;action=delete" onclick="return confirm('Delete this place? This cannot be undone.');" style="color:red;">Delete</a>
-				<?php endif; ?>
-			</div>
-
-			<div id="PlayGames" class="PlayGames">
-				<div style="text-align:center;margin:1em 5px;">
-					<span id="PlaceAccessIndicator"><img src="resources/public.png" alt="Public" border="0">&nbsp;Public</span>
-					&nbsp;&nbsp;<img src="resources/CopyLocked.png" alt="CopyLocked" border="0"> Copy Protection: <?php echo (int)$p['copylocked'] === 1 ? 'CopyLocked' : 'Public Domain'; ?>
-					<?php if ((int)$p['is_joinable'] !== 1): ?>&nbsp;&nbsp;<img src="resources/public.png" alt="Not Joinable" border="0"> Not Joinable<?php endif; ?>
-					<?php if ((int)$p['copylocked'] !== 1): ?>&nbsp;&nbsp;<a href="api/places/<?php echo $id; ?>.rbxl">Download</a><?php endif; ?>
-				</div>
-				<div style="text-align:center;margin:1em 5px;">
-					<input type="image" name="MultiplayerVisitButton" class="ImageButton" src="resources/Play.png" alt="Visit Online" onclick="alert('Joining is not available yet.');" style="border:0;cursor:pointer;">
-					<input type="image" name="SoloVisitButton" class="ImageButton" src="resources/PlaySolo.png" alt="Visit Solo" onclick="alert('Joining is not available yet.');" style="border:0;cursor:pointer;">
-				</div>
-			</div>
-		</div>
-
-		<div id="TabbedInfo" style="margin:10px;width:auto;">
-			<div id="TabbedInfo_header">
-				<span id="__tab_TabbedInfo_GamesTab"><h3 onclick="switchTab('games');">Games</h3></span>
-				<span id="__tab_TabbedInfo_CommentaryTab"><h3 onclick="switchTab('commentary');">Commentary</h3></span>
-			</div>
-			<div id="TabbedInfo_body">
-				<div id="TabbedInfo_GamesTab">
-					<div class="GameInstance"><center><p>There are no running games for this place.</p></center></div>
-					<div class="RefreshRunningGames"><input type="submit" value="Refresh" id="refreshButton" class="Button" onclick="window.location.href = window.location.href;"></div>
-				</div>
-				<div id="TabbedInfo_CommentaryTab" style="display:none;">
-					<div class="CommentsContainer"><div id="CommentsContainer"></div></div>
-				</div>
-			</div>
-		</div>
-		<div style="clear:both;"></div>
-	</div>
+    <div id="Item">
+        <h2><?php echo e($p['name']); ?></h2>
+        <?php foreach (consume_notices() as $n): ?>
+            <p style="color: <?php echo $n['type'] === 'success' ? '#060' : '#c00'; ?>; font-weight: bold;"><?php echo e($n['message']); ?></p>
+        <?php endforeach; ?>
+        <?php if ($showConfigure): ?>
+            <div id="Configure" style="background:#EEE;border:1px solid #CCC;padding:10px;margin:0 0 12px 0;">
+                <h3 style="margin:0 0 6px 0;">Configure Place</h3>
+                <form method="post" action="place.php?ID=<?php echo $id; ?>">
+                    <label for="cfname" style="font-weight:bold;">Place name:</label><br>
+                    <input type="text" name="name" id="cfname" maxlength="100" value="<?php echo e($p['name']); ?>" style="width:300px;"><br>
+                    <label for="cfdesc" style="font-weight:bold;">Description:</label><br>
+                    <textarea name="description" id="cfdesc" rows="4" cols="50"><?php echo e($p['description']); ?></textarea><br>
+                    <label><input type="checkbox" name="copylocked" value="1" <?php echo (int)$p['copylocked'] === 1 ? 'checked' : ''; ?>> CopyLocked (players can't download the game)</label><br>
+                    <label><input type="checkbox" name="is_joinable" value="1" <?php echo (int)$p['is_joinable'] === 1 ? 'checked' : ''; ?>> Joinable (players can join the game)</label><br>
+                    <button type="submit" class="Button" name="configure" value="1">Save</button>
+                    <a class="Button" href="place.php?ID=<?php echo $id; ?>">Cancel</a>
+                </form>
+            </div>
+        <?php endif; ?>
+        <div id="Details">
+          <div id="Summary">
+            <h3>ROBLOX Place</h3>
+            <div id="Creator" class="Creator">
+                <div class="Avatar">
+                    <a id="ctl00_cphRoblox_AvatarImage" title="<?php echo e($p['owner_name']); ?>" href="user.php?id=<?php echo (int)$p['owner_id']; ?>" style="display:inline-block;cursor:pointer;"><img src="<?php echo e(avatar_thumb(['id' => (int)$p['owner_id']], 'friends')); ?>" width="100" height="100" border="0" alt="<?php echo e($p['owner_name']); ?>" blankurl="http://t6.roblox.com:80/blank-100x100.gif"/></a>
+                </div>
+                Creator: <a id="ctl00_cphRoblox_CreatorHyperLink" href="user.php?id=<?php echo (int)$p['owner_id']; ?>"><?php echo e($p['owner_name']); ?></a>
+            </div>
+            <div id="LastUpdate">Updated: <?php echo e(time_ago($p['updated'] ?? $p['created'])); ?></div>
+            <div id="Favorited">Favorited: <?php echo $favCountReal; ?></div>
+            <div id="ctl00_cphRoblox_VisitedPanel" class="Visited">Visited: <?php echo $visitCountReal; ?></div>
+            <?php if (trim((string)$p['description']) !== ''): ?>
+            <div id="ctl00_cphRoblox_DescriptionPanel">
+                <div id="DescriptionLabel">Description:</div>
+                <div id="Description"><?php echo e($p['description']); ?></div>
+            </div>
+            <?php endif; ?>
+            <div id="ReportAbuse"><div id="ctl00_cphRoblox_AbuseReportButton1_AbuseReportPanel" class="ReportAbusePanel">
+              <span class="AbuseIcon"><a id="ctl00_cphRoblox_AbuseReportButton1_ReportAbuseIconHyperLink" href="report.php?target=place&amp;id=<?php echo $id; ?>"><img src="resources/abuse.png" alt="Report Abuse" border="0"/></a></span>
+              <span class="AbuseButton"><a id="ctl00_cphRoblox_AbuseReportButton1_ReportAbuseTextHyperLink" href="report.php?target=place&amp;id=<?php echo $id; ?>">Report Abuse</a></span>
+            </div></div>
+          </div>
+          <div id="Thumbnail_Place">
+            <a id="ctl00_cphRoblox_AssetThumbnailImage_Place" disabled="disabled" title="<?php echo e($p['name']); ?>" onclick="return false" style="display:inline-block;"><img src="Thumbs/Place.php?id=<?php echo $id; ?>&amp;v=<?php echo time(); ?>" width="420" height="230" border="0" alt="<?php echo e($p['name']); ?>"/></a>
+          </div>
+          <?php if ($me): ?>
+          <div id="Actions_Place">
+              <a id="ctl00_cphRoblox_FavoriteThisPlaceButton" href="place.php?ID=<?php echo $id; ?>&amp;favorite=<?php echo $isFav ? '0' : '1'; ?>"><?php echo $isFav ? 'Unfavorite' : 'Favorite'; ?></a>
+          </div>
+          <?php else: ?>
+          <div id="Actions_Place">
+              <a id="ctl00_cphRoblox_FavoriteThisPlaceButton" disabled="disabled">Favorite</a>
+          </div>
+          <?php endif; ?>
+          <?php if (is_admin()): ?>
+          <div id="Actions_Place">
+              <a href="api/renderplace.php?id=<?php echo $id; ?>">Render Place</a>
+          </div>
+          <?php endif; ?>
+          <div id="ctl00_cphRoblox_PlayGames" class="PlayGames">
+              <div style="text-align: center; margin: 1em 5px;">
+                <?php if ((int)$p['is_public'] === 1): ?>
+                    <span id="ctl00_cphRoblox_PlaceAccessIndicator_Public" style="display:inline;"><img id="ctl00_cphRoblox_PlaceAccessIndicator_iPublic" src="resources/public.png" alt="Public" border="0"/>&nbsp;Public</span>
+                <?php else: ?>
+                    <span id="ctl00_cphRoblox_PlaceAccessIndicator_FriendsOnlyLocked" style="display: inline;"><img id="ctl00_cphRoblox_PlaceAccessIndicator_iFriendsOnly_Locked" src="resources/locked.png" alt="Locked" border="0"/>&nbsp;Locked</span>
+                <?php endif; ?>
+                <img id="ctl00_cphRoblox_CopyLockedIcon" src="resources/CopyLocked.png" alt="CopyLocked" border="0"/>
+                Copy Protection: <?php echo (int)$p['copylocked'] === 1 ? 'CopyLocked' : 'Public Domain'; ?>
+              </div>
+              <?php if ((int)$p['is_public'] === 1): ?>
+              <div id="ctl00_cphRoblox_VisitButtons_VisitMPButton" style="display: inline; width: 10px;">
+                <input type="image" name="ctl00$cphRoblox$VisitButtons$MultiplayerVisitButton" id="ctl00_cphRoblox_VisitButtons_MultiplayerVisitButton" class="ImageButton" src="resources/Play.png" alt="Visit Online" onclick="JoinGame();" style="border:0;cursor:pointer;">
+              </div>
+              <div id="ctl00_cphRoblox_VisitButtons_VisitButton" style="display: inline; width: 10px;">
+                <input type="image" name="ctl00$cphRoblox$VisitButtons$SoloVisitButton" id="ctl00_cphRoblox_VisitButtons_SoloVisitButton" class="ImageButton" src="resources/PlaySolo.png" alt="Visit Solo" onclick="alert('soon');" style="border:0;cursor:pointer;">
+              </div>
+              <?php endif; ?>
+              <?php if ($isOwner || is_admin()): ?>
+              <div style="text-align: center; margin: 0.5em 5px;">
+                <a href="place.php?ID=<?php echo $id; ?>&amp;configure=1">Configure</a>
+                &nbsp;|&nbsp;
+                <a href="place.php?ID=<?php echo $id; ?>&amp;action=delete" onclick="return confirm('Delete this place? This cannot be undone.');" style="color:red;">Delete</a>
+              </div>
+              <?php endif; ?>
+          </div>
+          <div style="clear: both;"></div>
+        </div>
+        <div style="margin: 10px; width: 703px;">
+          <div class="ajax__tab_xp" id="TabbedInfo">
+            <div id="TabbedInfo_header">
+              <span id="__tab_TabbedInfo_GamesTab">
+                  <h3 style="color: #555;" onclick="switchTab('games');">Games</h3>
+              </span><span id="__tab_TabbedInfo_CommentaryTab">
+                  <h3 style="color: #555;" onclick="switchTab('commentary');">Commentary</h3>
+              </span>
+            </div><div id="TabbedInfo_body">
+              <div id="TabbedInfo_GamesTab">
+                <div id="TabbedInfo_GamesTab_RunningGamesUpdatePanel">
+                  <table id="TabbedInfo_GamesTab_RunningGamesDataList" cellspacing="0" border="0" width="100%">
+                    <tr>
+                      <td>
+                        <center><p>There are no running games for this place.</p></center>
+                      </td>
+                    </tr>
+                  </table>
+                  <div class="RefreshRunningGames">
+                    <input type="submit" value="Refresh" id="refreshButton" class="Button" onclick="window.location.href = window.location.href;"/>
+                  </div>
+                </div>
+              </div>
+              <div id="ctl00_cphRoblox_TabbedInfo_CommentaryTab" style="display:none;">
+                <div id="ctl00_cphRoblox_TabbedInfo_CommentaryTab_CommentsPane_CommentsUpdatePanel">
+                  <div id="CommentsContainer" class="CommentsContainer"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
 </div>
 <?php require __DIR__ . '/includes/footer.php'; ?>
